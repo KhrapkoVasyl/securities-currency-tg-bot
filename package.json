@@ -1,0 +1,29 @@
+{
+  "name": "securities-currency-tg-bot",
+  "version": "1.0.0",
+  "description": "Lab6 Web Basics. Bot uses Alpha Vantage Stock Data APIs to provide securities currency data",
+  "main": "bot.js",
+  "type": "module",
+  "scripts": {
+    "start": "node bot.js",
+    "start:dev": "nodemon bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KhrapkoVasyl/securities-currency-tg-bot.git"
+  },
+  "author": "Vasyl Khrapko (khrapko2002@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KhrapkoVasyl/securities-currency-tg-bot/issues"
+  },
+  "homepage": "https://github.com/KhrapkoVasyl/securities-currency-tg-bot#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "node-telegram-bot-api": "^0.64.0"
+  }
+}
