@@ -2,8 +2,11 @@ import { config } from 'dotenv';
 import axios from 'axios';
 import {
   BotMessages,
+  LAST_PRICE_KEY,
   MarketStatuses,
+  PRICES_KEY,
   SECURITIES_API_COMMANDS,
+  SECURITY_CURRENCY_INTERVAL,
   placeholders,
 } from './constants.js';
 config();
@@ -45,7 +48,7 @@ const getMarketStatusByRegion = (markets, searchRegion) => {
   );
 };
 
-const getMarketStatus = async (region) => {
+export const getMarketStatus = async (region) => {
   const res = await axios.get(
     `${apiUrl}?apikey=${apiKey}&function=${SECURITIES_API_COMMANDS.GET_STATUS}`
   );
@@ -60,15 +63,23 @@ const getMarketStatus = async (region) => {
     : getMarketStatusesList(markets);
 };
 
-const getSecurityCurrency = async (tickerOrName) => {
-  for (let i = 0; i < 100; i++) {
-    const res = await axios.get(
-      `${apiUrl}?apikey=${apiKey}&function=${SECURITIES_API_COMMANDS.GET_BY_TICKER_OR_NAME}&keywords=${tickerOrName}`
-    );
+export const getSecurityCurrency = async (ticker) => {
+  const res = await axios.get(
+    `${apiUrl}?apikey=${apiKey}&function=${SECURITIES_API_COMMANDS.GET_BY_TICKER_OR_NAME}&symbol=${ticker}&interval=${SECURITY_CURRENCY_INTERVAL}`
+  );
 
-    console.log(res);
-    const currency = res?.data?.bestMatches?.[0];
-  }
+  const currencyData = res?.data;
+  const timeSeries = currencyData?.[`${PRICES_KEY}`] ?? {};
+  const latestTime = Object.keys(timeSeries)[0];
+  const latestPrice = timeSeries?.[latestTime]?.[`${LAST_PRICE_KEY}`];
+
+  return latestPrice && latestTime
+    ? BotMessages.SECURITY_CURRENCY.replace(
+        placeholders.security,
+        ticker
+      ).replace(placeholders.currency, latestPrice)
+    : BotMessages.NO_SECURITY_CURRENCY_INFO.replace(
+        placeholders.security,
+        ticker
+      );
 };
-
-console.log(await getSecurityCurrency('vooq'));

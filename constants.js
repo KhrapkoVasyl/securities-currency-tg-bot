@@ -7,6 +7,8 @@ export const placeholders = {
   statuses: '[STATUSES]',
   status: '[STATUS]',
   region: '[REGION]',
+  security: '[SECURITY]',
+  currency: '[CURRENCY]',
 };
 
 export const BotMessages = {
@@ -17,6 +19,8 @@ export const BotMessages = {
   NO_STOCK_MARKET_BY_REGION_INFO: `No information about stock market with specified region (${placeholders.region})`,
   STOCK_MARKET_STATUSES: `Stock market statuses:\n${placeholders.statuses}`,
   STOCK_MARKET_STATUS: `Stock market status: ${placeholders.status}`,
+  SECURITY_CURRENCY: `Current currency of specified security (${placeholders.security}): $${placeholders.currency}`,
+  NO_SECURITY_CURRENCY_INFO: `Currency of specified security (${placeholders.security}) WAS NOT FOUND`,
 };
 
 export const BOT_COMMANDS = [
@@ -33,8 +37,12 @@ export const BOT_COMMANDS = [
 
 export const SECURITIES_API_COMMANDS = {
   GET_STATUS: 'MARKET_STATUS',
-  GET_BY_TICKER_OR_NAME: 'SYMBOL_SEARCH',
+  GET_BY_TICKER_OR_NAME: 'TIME_SERIES_INTRADAY',
 };
+
+export const SECURITY_CURRENCY_INTERVAL = '1min';
+export const PRICES_KEY = `Time Series (${SECURITY_CURRENCY_INTERVAL})`;
+export const LAST_PRICE_KEY = '1. open';
 
 export const MarketStatuses = {
   closed: 'closed❌',
