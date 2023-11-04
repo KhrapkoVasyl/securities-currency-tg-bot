@@ -19,8 +19,9 @@ export const BotMessages = {
   NO_STOCK_MARKET_BY_REGION_INFO: `No information about stock market with specified region (${placeholders.region})`,
   STOCK_MARKET_STATUSES: `Stock market statuses:\n${placeholders.statuses}`,
   STOCK_MARKET_STATUS: `Stock market status: ${placeholders.status}`,
-  SECURITY_CURRENCY: `Current currency of specified security (${placeholders.security}): $${placeholders.currency}`,
-  NO_SECURITY_CURRENCY_INFO: `Currency of specified security (${placeholders.security}) WAS NOT FOUND`,
+  SECURITY_CURRENCY: `Last currency of specified security (${placeholders.security}): $${placeholders.currency}`,
+  NO_SECURITY_CURRENCY_INFO: `Currency of specified security (${placeholders.security}) was not found`,
+  SECURITY_TICKER_NOT_SPECIFIED: `Security ticker not specified. Please, try again with ticker, e.g. '/currency voo'`,
 };
 
 export const BOT_COMMANDS = [
@@ -46,5 +47,5 @@ export const LAST_PRICE_KEY = '1. open';
 
 export const MarketStatuses = {
   closed: 'closed❌',
-  open: 'open✔ ',
+  open: 'open✅ ',
 };

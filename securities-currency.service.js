@@ -64,6 +64,10 @@ export const getMarketStatus = async (region) => {
 };
 
 export const getSecurityCurrency = async (ticker) => {
+  if (!ticker?.trim()) {
+    return BotMessages.SECURITY_TICKER_NOT_SPECIFIED;
+  }
+
   const res = await axios.get(
     `${apiUrl}?apikey=${apiKey}&function=${SECURITIES_API_COMMANDS.GET_BY_TICKER_OR_NAME}&symbol=${ticker}&interval=${SECURITY_CURRENCY_INTERVAL}`
   );
